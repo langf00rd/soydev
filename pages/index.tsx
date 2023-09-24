@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import { Button } from "~/components/ui/Button";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,9 +14,17 @@ export default function Home() {
             soydev [ soy - dev ] <i>noun</i>
           </p>
           <p>
-            A &ldquo;programmer&rdquo; that works at a bich tech company and only knows
-            javascript and HTML. They love IDEs like Visual Studio Code and inefficient
-            frameworks that slow their code down.
+            &ldquo;A &lsquo;programmer&rsquo; that works at a bich tech company and only
+            knows javascript and HTML. They love IDEs like Visual Studio Code and
+            inefficient frameworks that slow their code down...&rdquo; -
+            <Link
+              rel="noreferrer"
+              href="https://www.urbandictionary.com/define.php?term=Soydev"
+              target="_blank"
+              className="underline"
+            >
+              &nbsp;Urban dictionary
+            </Link>
           </p>
         </div>
         <div className="flex items-center justify-center gap-3">
