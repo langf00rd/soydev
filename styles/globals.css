@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply min-h-screen;
+}
+
 * {
-  @apply box-border tracking-tighter text-textAccent1;
+  @apply box-border tracking-tighter text-textAccent1 antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-[#000] font-[600];
 }
