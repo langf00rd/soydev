@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 html {
-  @apply min-h-screen leading-[1.7];
+  @apply min-h-screen leading-[1.7] bg-[#FAFAFA];
 }
 
 * {
-  @apply p-0 m-0 box-border tracking-tighter text-textAccent1 antialiased;
+  @apply p-0 m-0 box-border tracking-tight text-textAccent1 antialiased list-none;
 }
 
 h1,
@@ -17,4 +17,14 @@ h4,
 h5,
 h6 {
   @apply text-[#000] font-[600];
+}
+
+.container {
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(300px);
+  scroll-snap-type: y mandatory;
+}
+
+.child {
+  scroll-snap-align: start;
 }
