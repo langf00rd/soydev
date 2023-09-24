@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Button } from "~/components/ui/Button";
+import ROUTES from "~/routes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,9 @@ export default function Home() {
         </div>{" "}
         <h1 className="text-[4rem] -mb-6">so youre a dev huh?</h1>
         <div className="flex items-center justify-center gap-3">
-          <Button>Yes, yes i am</Button>
+          <Link href={ROUTES.questions}>
+            <Button>Yes, yes i am</Button>
+          </Link>
           <Button variant="outline">Nah</Button>
         </div>
       </main>
