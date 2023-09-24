@@ -38,8 +38,7 @@ const QUESTIONS: Question[] = [
   },
   {
     q: "How do you stay updated with the latest industry trends and technologies?",
-    isMultiChoice: true,
-    options: ["yes", "no"],
+    isMultiChoice: false,
   },
   {
     q: "Have you ever had to communicate complex technical concepts to non-technical team members or stakeholders?",
