@@ -8,7 +8,6 @@ export default function Home() {
   return (
     <div className={`${inter.className} h-screen`}>
       <main className="text-center flex items-center justify-center flex-col h-full gap-10">
-        <h1 className="text-[4rem] -mb-6">so youre a dev huh?</h1>
         <div className="max-w-[600px] grid gap-2">
           <p className="font-[500] text-[#000]">
             soydev [ soy - dev ] <i>noun</i>
@@ -21,12 +20,12 @@ export default function Home() {
               rel="noreferrer"
               href="https://www.urbandictionary.com/define.php?term=Soydev"
               target="_blank"
-              className="underline"
             >
               &nbsp;Urban dictionary
             </Link>
           </p>
-        </div>
+        </div>{" "}
+        <h1 className="text-[4rem] -mb-6">so youre a dev huh?</h1>
         <div className="flex items-center justify-center gap-3">
           <Button>Yes, yes i am</Button>
           <Button variant="outline">Nah</Button>
