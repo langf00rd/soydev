@@ -32,11 +32,7 @@ export default function Questions(): JSX.Element {
     <>
       <div className="fixed bottom-0 left-0 border-t w-screen bg-background p-3 flex items-center justify-between z-10">
         <Link href={ROUTES.checklist} className="flex gap-2 hover:text-primary">
-          <Button
-            className="rounded-full gap-2"
-            variant="link"
-            disabled={answers.length !== QUESTIONS.length}
-          >
+          <Button className="rounded-full gap-2" variant="link">
             <ListTodo />
             <p>Use checklist</p>
           </Button>
@@ -62,7 +58,7 @@ export default function Questions(): JSX.Element {
               key={i}
               className="grid gap-5 w-full max-w-xl mx-auto child"
             >
-              <h1 className="text-3xl">{a.q}</h1>
+              <h2 className="text-2xl">{a.q}</h2>
               {a.options ? (
                 <ul className="grid gap-5">
                   {a.options.map((option: string, j: number) => (
