@@ -1,0 +1,17 @@
+name: test
+on: [push, pull_request]
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: install bun
+        run: npm install -g bun
+
+      - name: install dependencies
+        run: bun i
+
+      - name: lint
+        run: bun run lint
