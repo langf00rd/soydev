@@ -25,13 +25,15 @@ export default function Home() {
               &nbsp;Urban dictionary
             </Link>
           </p>
-        </div>{" "}
+        </div>
         <h1 className="text-[4rem] -mb-6">so youre a dev huh?</h1>
-        <div className="flex items-center justify-center gap-3">
-          <Link href={ROUTES.questions}>
-            <Button>Yes, yes i am</Button>
+        <div>
+          <Link href={ROUTES.checklist}>
+            <Button variant="link">use checklist</Button>
           </Link>
-          <Button variant="outline">Nah</Button>
+          <Link href={ROUTES.questions}>
+            <Button variant="link">use q&a</Button>
+          </Link>
         </div>
       </main>
     </div>
