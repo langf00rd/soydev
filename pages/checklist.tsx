@@ -58,7 +58,7 @@ export default function Checklist(): JSX.Element {
   const [selectedRole, setSelectedRole] = useState("");
   const [showChecklist, setShowChecklist] = useState(false);
   const [checklistToShow, setChecklistToShow] = useState<string[]>([]);
-  const [progressColor, setProgressColor] = useState("bg-[#000]");
+  const [progressColor, setProgressColor] = useState("#FFF");
   const [percentageChecked, setPercentageChecked] = useState(0);
   const [emoji, setEmoji] = useState("");
 
@@ -77,12 +77,12 @@ export default function Checklist(): JSX.Element {
     setPercentageChecked(percentage);
     if (percentage < 40) {
       setEmoji("🤨💩");
-      setProgressColor("red-400");
+      setProgressColor("#ff5e5e");
     } else if (percentage > 40 && percentage < 70) {
-      setProgressColor("yellow-300");
+      setProgressColor("#FFEB3B");
       setEmoji("🙂✨");
     } else if (percentage > 70) {
-      setProgressColor("green-500");
+      setProgressColor("#8fff8f");
       setEmoji("😎💪");
     }
     return percentage;
@@ -160,7 +160,9 @@ export default function Checklist(): JSX.Element {
                     </div>
                     <div className="space-y-5">
                       <Progress
-                        className={`bg-${progressColor}`}
+                        //   className={`bg-${progressColor}`}
+                        color={progressColor}
+                        // style={{ background: progressColor }}
                         value={getProgressValue(values.checked)}
                       />
                       {percentageChecked > 0 && (
