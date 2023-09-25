@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply min-h-screen leading-[1.7] bg-[#FAFAFA];
+  @apply min-h-screen leading-[1.7] bg-background;
 }
 
 * {
@@ -17,14 +17,4 @@ h4,
 h5,
 h6 {
   @apply text-[#000] font-[600];
-}
-
-.container {
-  scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(300px);
-  scroll-snap-type: y mandatory;
-}
-
-.child {
-  scroll-snap-align: start;
 }
