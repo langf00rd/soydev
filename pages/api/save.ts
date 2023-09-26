@@ -1,10 +1,6 @@
-// const { PrismaClient } = require("@prisma/client");
-// import { NextApiRequest, NextApiResponse } from "next";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
-import prisma from "~/lib/prisma";
-// import prisma from "~/prisma";
-// const prisma = new PrismaClient();
+import prisma from "~/prisma";
 
 const resultSchema = z.object({
   uid: z.string(),
@@ -62,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         });
       }
-      res.json({ message: "db updated" });
+      res.status(200).json({ message: "db updated" });
     }
   } catch (error) {
     res.status(500).json({ error });
