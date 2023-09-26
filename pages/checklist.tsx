@@ -8,6 +8,7 @@ import { Progress } from "~/components/ui/Progress";
 import ROUTES from "~/routes";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Loader from "~/components/Loader";
 
 const FRONTEND_CHECKLIST = [
   "Proficiency in HTML/CSS",
@@ -63,6 +64,7 @@ export default function Checklist(): JSX.Element {
   const { replace } = useRouter();
   const { isLoaded, userId } = useAuth();
   const { user } = useUser();
+  const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
   const [showChecklist, setShowChecklist] = useState(false);
   const [checklistToShow, setChecklistToShow] = useState<string[]>([]);
@@ -95,6 +97,7 @@ export default function Checklist(): JSX.Element {
   };
 
   async function updateDB(percentage: number) {
+    setLoading(true);
     await axios
       .post("/api/save", {
         percentage: percentage,
@@ -104,8 +107,9 @@ export default function Checklist(): JSX.Element {
         fullName: user?.fullName,
         photo: user?.imageUrl,
       })
-      .then((response) => console.log(response))
+      .then((response) => toast.success("updated!"))
       .catch((error) => toast.error(error.message));
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -193,11 +197,12 @@ export default function Checklist(): JSX.Element {
                             {percentageChecked}% <span className="ml-3">{emoji}</span>
                           </h3>
                           <Button
+                            disabled={loading || percentageChecked <= 0}
                             className="rounded-full"
                             type="submit"
                             onClick={() => updateDB(percentageChecked)}
                           >
-                            Save
+                            {loading ? <Loader /> : "Save"}
                           </Button>
                         </div>
                       </div>

@@ -2,8 +2,6 @@ import Image from "next/image";
 import Header from "~/components/Header";
 import { Result } from "~/interface";
 import prisma from "~/prisma";
-import React from "react";
-
 import { CircularProgress } from "@nextui-org/react";
 
 export async function getServerSideProps() {
@@ -21,15 +19,15 @@ export async function getServerSideProps() {
 }
 
 export default function Leaderboard(props: { results: Result[] }): JSX.Element {
-  function getColorFromPercentage(percentage: number) {
-    if (percentage <= 40) {
-      return "#ff5e5e";
-    } else if (percentage >= 40 && percentage <= 70) {
-      return "#FFEB3B";
-    } else if (percentage >= 70) {
-      return "#8fff8f";
-    }
-  }
+  // function getColorFromPercentage(percentage: number) {
+  //   if (percentage <= 40) {
+  //     return "#ff5e5e";
+  //   } else if (percentage >= 40 && percentage <= 70) {
+  //     return "#FFEB3B";
+  //   } else if (percentage >= 70) {
+  //     return "#8fff8f";
+  //   }
+  // }
   return (
     <>
       <Header />

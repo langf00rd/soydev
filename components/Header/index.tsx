@@ -16,6 +16,11 @@ export default function Header(): JSX.Element {
         </Link>
         <ul className="flex items-center justify-center w-full">
           <li>
+            <Link href={ROUTES.leaderboard}>
+              <Button variant="link">leaderboard</Button>
+            </Link>
+          </li>
+          <li>
             <Link href={ROUTES.checklist}>
               <Button variant="link">use checklist</Button>
             </Link>
@@ -25,14 +30,15 @@ export default function Header(): JSX.Element {
               <Button variant="link">use q&a</Button>
             </Link>
           </li>
-          <li>
-            <Link href={ROUTES.leaderboard}>
-              <Button variant="link">leaderboard</Button>
-            </Link>
-          </li>
         </ul>
         <div className="flex items-center gap-5">
-          <Github />
+          <Link
+            rel="noreferrer"
+            target="_blank"
+            href="https://github.com/langford-dev/soydev"
+          >
+            <Github />
+          </Link>
           <SignedIn>
             <UserButton />
           </SignedIn>
