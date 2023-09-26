@@ -1,7 +1,5 @@
 name: ci
 on: [push, pull_request]
-env:
-  env_var: ${{ vars.DATABASE_URL }}
 jobs:
   run-ci:
     runs-on: ubuntu-latest
@@ -20,6 +18,7 @@ jobs:
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}"
           CLERK_SECRET_KEY: "${{secrets.CLERK_SECRET_KEY}}"
+          DATABASE_URL: "${{secrets.DATABASE_URL}}"
 
       - name: lint
         run: bun run lint
