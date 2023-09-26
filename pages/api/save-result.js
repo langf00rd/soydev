@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
+const { PrismaClient } = require("@prisma/client");
+// import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
 const prisma = new PrismaClient();
@@ -13,7 +13,7 @@ const resultSchema = z.object({
   photo: z.string(),
 });
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
   try {
     const validation = resultSchema.safeParse(req.body);
     const body = resultSchema.parse(req.body);

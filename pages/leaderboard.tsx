@@ -2,13 +2,18 @@ import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
 import Header from "~/components/Header";
 import { Result } from "~/interface";
+import prisma from "~/prisma";
 
 export async function getStaticProps() {
-  const prisma = new PrismaClient();
   const results = await prisma.result.findMany();
-
+  const sortedResults = results.sort(
+    (a: Result, b: Result) => b.percentage - a.percentage
+  );
+  const sortedResultsWithRanks = sortedResults.map((o: Result, i: number) =>
+    Object.assign(o, { rank: i + 1 })
+  );
   return {
-    props: { results },
+    props: { results: sortedResultsWithRanks },
   };
 }
 
