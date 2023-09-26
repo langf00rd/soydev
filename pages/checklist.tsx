@@ -92,7 +92,7 @@ export default function Checklist(): JSX.Element {
       setProgressColor("#8fff8f");
       setEmoji("😎💪");
     }
-    updateDB(percentage);
+    // updateDB(percentage);
   };
 
   async function updateDB(percentage: number) {
@@ -189,9 +189,18 @@ export default function Checklist(): JSX.Element {
                       </div>
                       <div className="space-y-5">
                         <Progress color={progressColor} value={percentageChecked} />
-                        <h3 className="text-4xl">
-                          {percentageChecked}% <span className="ml-3">{emoji}</span>
-                        </h3>
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-3xl">
+                            {percentageChecked}% <span className="ml-3">{emoji}</span>
+                          </h3>
+                          <Button
+                            className="rounded-full"
+                            type="submit"
+                            onClick={() => updateDB(percentageChecked)}
+                          >
+                            Save
+                          </Button>
+                        </div>
                       </div>
                     </Form>
                   )}
