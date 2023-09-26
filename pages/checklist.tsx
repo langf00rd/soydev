@@ -1,98 +1,87 @@
 import { useAuth, useUser } from "@clerk/nextjs";
 import { Field, Form, Formik } from "formik";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Asterisk,
+  Cable,
+  Laptop2,
+  MousePointerSquare,
+  TrainTrack,
+} from "lucide-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "~/components/ui/Button";
 import { Progress } from "~/components/ui/Progress";
 import ROUTES from "~/routes";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "~/components/Loader";
+import {
+  FRONTEND_CHECKLIST,
+  BACKEND_CHECKLIST,
+  FULLSTACK_CHECKLIST,
+} from "~/data/checklist";
+import { Checklist, JobType } from "~/interface";
+import Header from "~/components/Header";
 
-const FRONTEND_CHECKLIST = [
-  "Proficiency in HTML/CSS",
-  "Strong JavaScript skills, including ES6+ features",
-  "Experience with front-end frameworks and libraries (e.g., React, Angular, Vue.js)",
-  "Responsive web design and mobile-first development",
-  "Knowledge of web accessibility standards (e.g., WCAG)",
-  "Familiarity with CSS preprocessors (e.g., SASS, LESS)",
-  "Understanding of browser developer tools for debugging",
-  "Knowledge of asynchronous programming and AJAX",
-  "Cross-browser compatibility testing",
-  "Experience with RESTful API integration",
-  "Frontend build tools (e.g., Webpack, Babel)",
-  "Version control (e.g., Git)",
+const JOB_TYPES: JobType[] = [
+  {
+    title: "frontend developer",
+    icon: <Asterisk />,
+  },
+  {
+    title: "software engineer",
+    icon: <TrainTrack />,
+  },
+  {
+    title: "backend developer",
+    icon: <Cable />,
+  },
+  {
+    title: "fullstack developer",
+    icon: <Laptop2 />,
+  },
+  {
+    title: "UI & UX designer",
+    icon: <MousePointerSquare />,
+  },
 ];
 
-const BACKEND_CHECKLIST = [
-  "Proficiency in server-side programming languages (e.g., Node.js, Python, Ruby, Java, C#)",
-  "Knowledge of web application frameworks (e.g., Express.js, Django, Ruby on Rails)",
-  "Database management skills (e.g., SQL, NoSQL databases like MongoDB)",
-  "RESTful API design and development",
-  "Authentication and authorization mechanisms",
-  "Understanding of server deployment and hosting (e.g., AWS, Heroku)",
-  "Caching mechanisms and performance optimization",
-  "Knowledge of security best practices (e.g., OWASP Top Ten)",
-  "Handling of asynchronous operations",
-  "Version control (e.g., Git)",
-  "Familiarity with containerization (e.g., Docker) and orchestration (e.g., Kubernetes)",
-];
-
-const FULLSTACK_CHECKLIST = [
-  "Proficiency in both frontend and backend technologies",
-  "Ability to design and develop complete web applications",
-  "Strong communication skills for collaborating with cross-functional teams",
-  "Knowledge of the entire web development stack, from UI to databases",
-  "Experience with integrating frontend and backend components",
-  "Understanding of software architecture and system design",
-  "Ability to work on both client-facing and server-side code",
-  "Troubleshooting and debugging skills for the entire application stack",
-  "Agile development and project management skills",
-  "Continuous integration and continuous delivery (CI/CD) knowledge",
-];
-
-const JOB_TYPES = [
-  "frontend developer",
-  "software engineer",
-  "backend developer",
-  "fullstack developer",
-  "UI & UX designer",
-];
-
-export default function Checklist(): JSX.Element {
+export default function ChecklistPage(): JSX.Element {
   const { replace } = useRouter();
   const { isLoaded, userId } = useAuth();
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState("");
   const [showChecklist, setShowChecklist] = useState(false);
-  const [checklistToShow, setChecklistToShow] = useState<string[]>([]);
+  const [checklistToShow, setChecklistToShow] = useState<Checklist[]>([]);
   const [progressColor, setProgressColor] = useState("#FFF");
   const [percentageChecked, setPercentageChecked] = useState(0);
+  const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const [emoji, setEmoji] = useState("");
 
   const onProceed = () => {
     setShowChecklist(true);
-    if (selectedRole === JOB_TYPES[0]) setChecklistToShow(FRONTEND_CHECKLIST);
-    if (selectedRole === JOB_TYPES[2]) setChecklistToShow(BACKEND_CHECKLIST);
-    if (selectedRole === JOB_TYPES[3]) setChecklistToShow(FULLSTACK_CHECKLIST);
+    if (selectedRole === JOB_TYPES[0].title) setChecklistToShow(FRONTEND_CHECKLIST);
+    if (selectedRole === JOB_TYPES[2].title) setChecklistToShow(BACKEND_CHECKLIST);
+    if (selectedRole === JOB_TYPES[3].title) setChecklistToShow(FULLSTACK_CHECKLIST);
   };
 
-  const getProgressValue = (checked: string[]) => {
+  const updateProgress = (checked: string[]) => {
     const percentage = Number(
       ((checked.length / checklistToShow.length) * 100).toFixed(0)
     );
     setPercentageChecked(percentage);
     if (percentage <= 40) {
-      setEmoji("🤨💩");
+      setEmoji("💩");
       setProgressColor("#ff5e5e");
     } else if (percentage >= 40 && percentage <= 70) {
       setProgressColor("#FFEB3B");
-      setEmoji("🙂✨");
+      setEmoji("✨");
     } else if (percentage >= 70) {
       setProgressColor("#8fff8f");
-      setEmoji("😎💪");
+      setEmoji("🔥");
     }
   };
 
@@ -103,11 +92,12 @@ export default function Checklist(): JSX.Element {
         percentage: percentage,
         role: selectedRole,
         uid: user?.id,
+        checklist: checkedItems,
         createdAt: Date.now().toString(),
         fullName: user?.fullName,
         photo: user?.imageUrl,
       })
-      .then((response) => toast.success("updated!"))
+      .then(() => toast.success("updated!"))
       .catch((error) => toast.error(error.message));
     setLoading(false);
   }
@@ -119,97 +109,93 @@ export default function Checklist(): JSX.Element {
   if (isLoaded)
     return (
       <>
-        <div className="w-screen flex items-center justify-center flex-col">
-          <main className="grid gap-10 py-10">
+        <Header />
+        <div className="min-w-screen min-h-screen flex items-center justify-center px-5">
+          <main className="max-w-4xl w-full py-10 mx-auto space-y-10">
             <div>
-              <h1 className="text-3xl">
-                {showChecklist ? `${selectedRole} checklist` : "what are you?"}
+              <h1 className="text-2xl md:text-4xl">
+                {showChecklist
+                  ? `${selectedRole} checklist`
+                  : "what is your current role?"}
               </h1>
               <p>
                 {!showChecklist
-                  ? "Select your current role from the options below"
-                  : "Choose from below the skills that apply"}
+                  ? "select your current role from the options below"
+                  : "choose from below the skills that apply"}
               </p>
             </div>
             {!showChecklist ? (
-              <div className="grid gap-5">
-                <ul className="grid grid-cols-2 gap-5">
+              <div className="space-y-10">
+                <ul className="gap-3 grid grid-cols-2 w-full">
                   {JOB_TYPES.map((jobType, index: number) => (
                     <li key={index}>
                       <Button
-                        onClick={() => setSelectedRole(jobType)}
-                        className={`py-20 px-10 font-[600] text-xl ${
-                          selectedRole === jobType && "bg-[#000] text-white"
+                        onClick={() => setSelectedRole(jobType.title)}
+                        className={`font-[600] text-xl w-full py-10 space-x-2 ${
+                          selectedRole === jobType.title &&
+                          "border-2 border-primary text-white"
                         }`}
                         variant="outline"
                       >
-                        {jobType}
+                        <div>{jobType.icon}</div>
+                        <p>{jobType.title}</p>
                       </Button>
                     </li>
                   ))}
                 </ul>
                 <Button
-                  className="rounded-full gap-2 py-7 w-max"
                   onClick={onProceed}
                   disabled={!selectedRole}
+                  variant="ghost"
+                  className="text-xl gap-2 -ml-4"
                 >
-                  let&apos;s do this
-                  <ArrowRight color="#FFF" />
+                  continue
+                  <ArrowRight />
                 </Button>
               </div>
             ) : (
-              <div>
-                <Formik
-                  initialValues={{
-                    checked: [],
-                  }}
-                  onSubmit={(values: { checked: string[] }) =>
-                    getProgressValue(values.checked)
-                  }
-                >
-                  {({ values, submitForm, setFieldValue }) => (
-                    <Form className="space-y-10">
+              <Formik
+                onSubmit={async (values: { checked: string[] }) => {
+                  updateProgress(values.checked);
+                  setCheckedItems(values.checked);
+                }}
+                initialValues={{
+                  checked: [],
+                }}
+              >
+                {({ submitForm }) => (
+                  <>
+                    <Form>
                       <div
                         role="group"
                         aria-labelledby="checkbox-group"
                         className="flex flex-col gap-5"
                       >
-                        {checklistToShow.map((item, index: number) => (
-                          <label
-                            className="flex gap-2 items-center cursor-pointer select-none"
-                            key={index}
-                          >
-                            <Field
-                              className="w-5 h-5 cursor-pointer"
-                              type="checkbox"
-                              name="checked"
-                              value={item}
-                              onClick={submitForm}
+                        {checklistToShow.map((listItem, index: number) => {
+                          return (
+                            <CheckListItem
+                              submitForm={submitForm}
+                              listItem={listItem}
+                              key={index}
                             />
-                            {item}
-                          </label>
-                        ))}
-                      </div>
-                      <div className="space-y-5">
-                        <Progress color={progressColor} value={percentageChecked} />
-                        <div className="flex items-center justify-between">
-                          <h3 className="text-3xl">
-                            {percentageChecked}% <span className="ml-3">{emoji}</span>
-                          </h3>
-                          <Button
-                            disabled={loading || percentageChecked <= 0}
-                            className="rounded-full"
-                            type="submit"
-                            onClick={() => updateDB(percentageChecked)}
-                          >
-                            {loading ? <Loader /> : "Save"}
-                          </Button>
-                        </div>
+                          );
+                        })}
                       </div>
                     </Form>
-                  )}
-                </Formik>
-              </div>
+                    {percentageChecked > 0 && (
+                      <Progress color={progressColor} value={percentageChecked} />
+                    )}
+                    <Button
+                      disabled={percentageChecked <= 0}
+                      onClick={() => updateDB(percentageChecked)}
+                      className="bg-[#000] text-[#FFF]"
+                      variant="outline"
+                    >
+                      {loading ? <Loader /> : "Save"}
+                    </Button>
+                  </>
+                )}
+              </Formik>
             )}
           </main>
         </div>
@@ -218,3 +204,74 @@ export default function Checklist(): JSX.Element {
 
   return <></>;
 }
+
+export function CheckListItem(props: {
+  listItem: Checklist;
+  submitForm: () => void;
+}): JSX.Element {
+  const [showChildren, setShowChildren] = useState(false);
+  return (
+    <div>
+      {!props.listItem.hasChildren ? (
+        <label className={styles.listItem} onClick={props.submitForm}>
+          <Field
+            type="checkbox"
+            className={styles.checkbox}
+            name="checked"
+            value={props.listItem.label}
+          />
+          <p className={styles.listItemLabel}>{props.listItem.label}</p>
+        </label>
+      ) : (
+        <>
+          <div
+            className={styles.listItem}
+            onClick={() => {
+              setShowChildren(!showChildren);
+              props.submitForm();
+            }}
+          >
+            <input
+              onChange={() => {}}
+              checked={showChildren}
+              type="checkbox"
+              className={styles.checkbox}
+            />
+            <p className={styles.listItemLabel}>{props.listItem.label}</p>
+          </div>
+          {showChildren && (
+            <div className="ml-5 space-y-2 mt-3">
+              <p className="md:text-xl">{props.listItem.childrenLabel}</p>
+              <motion.ul
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="space-y-5"
+              >
+                {props.listItem.children?.map((child, index: number) => (
+                  <li key={index}>
+                    <label className={styles.listItem} onClick={props.submitForm}>
+                      <Field
+                        type="checkbox"
+                        className={styles.checkbox}
+                        name="checked"
+                        value={child}
+                      />
+                      <p className={styles.listItemLabel}>{child}</p>
+                    </label>
+                  </li>
+                ))}
+              </motion.ul>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+const styles = {
+  listItem: "flex items-center space-x-2 select-none",
+  checkbox: "h-4 w-4",
+  listItemLabel: "text-md md:text-xl text-[#000]",
+};

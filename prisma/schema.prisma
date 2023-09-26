@@ -9,10 +9,11 @@ datasource db {
 }
 
 model Result {
-    id         String @id @default(auto()) @map("_id") @db.ObjectId
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
     uid        String
     percentage Int
     createdAt  String
+    checklist  String[]
     role       String
     fullName   String
     photo      String

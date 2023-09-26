@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Question {
   q: string;
   a?: any;
@@ -14,4 +16,16 @@ export interface Result {
   role: string;
   uid: string;
   rank?: number;
+}
+
+export interface Checklist {
+  label: string;
+  hasChildren: boolean;
+  children?: string[];
+  childrenLabel?: string;
+}
+
+export interface JobType {
+  title: string;
+  icon: ReactNode;
 }
