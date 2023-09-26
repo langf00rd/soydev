@@ -2,7 +2,7 @@ import { Bean, Github } from "lucide-react";
 import ROUTES from "~/routes";
 import { Button } from "../ui/Button";
 import Link from "next/link";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 
 export default function Header(): JSX.Element {
   return (
