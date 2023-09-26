@@ -10,7 +10,7 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: "18"
 
       - name: install bun
         run: npm install -g bun
@@ -21,9 +21,9 @@ jobs:
       - name: build
         run: bun run build
         env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}"
-          CLERK_SECRET_KEY: "${{secrets.CLERK_SECRET_KEY}}"
-          DATABASE_URL: "${{secrets.DATABASE_URL}}"
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}
+          CLERK_SECRET_KEY: ${{secrets.CLERK_SECRET_KEY}}
+          DATABASE_URL: ${{secrets.PROD_DATABASE_URL}}
 
       - name: lint
         run: bun run lint
