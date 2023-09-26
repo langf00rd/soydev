@@ -6,6 +6,7 @@ const resultSchema = z.object({
   uid: z.string(),
   createdAt: z.string(),
   percentage: z.number(),
+  checklist: z.array(z.string()),
   role: z.string(),
   fullName: z.string(),
   photo: z.string(),
@@ -13,6 +14,7 @@ const resultSchema = z.object({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
+    console.log(req.body);
     const validation = resultSchema.safeParse(req.body);
     const body = resultSchema.parse(req.body);
     if (!validation.success) {
@@ -33,6 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             uid: body.uid,
             percentage: body.percentage,
             createdAt: body.createdAt,
+            checklist: body.checklist,
             role: body.role,
             fullName: body.fullName,
             photo: body.photo,
