@@ -13,12 +13,14 @@ jobs:
       - name: install dependencies
         run: bun i
 
+      - name: pull env vars into CLI
+        run: bunx prisma db pull --force
+
       - name: build
         run: bun run build
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}"
           CLERK_SECRET_KEY: "${{secrets.CLERK_SECRET_KEY}}"
-          DATABASE_URL: "${{vars.DATABASE_URL}}"
 
       - name: lint
         run: bun run lint
