@@ -1,8 +1,13 @@
+import { useAuth, useUser } from "@clerk/nextjs";
 import { Field, Form, Formik } from "formik";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/Button";
 import { Progress } from "~/components/ui/Progress";
+import ROUTES from "~/routes";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const FRONTEND_CHECKLIST = [
   "Proficiency in HTML/CSS",
@@ -55,6 +60,9 @@ const JOB_TYPES = [
 ];
 
 export default function Checklist(): JSX.Element {
+  const { replace } = useRouter();
+  const { isLoaded, userId } = useAuth();
+  const { user } = useUser();
   const [selectedRole, setSelectedRole] = useState("");
   const [showChecklist, setShowChecklist] = useState(false);
   const [checklistToShow, setChecklistToShow] = useState<string[]>([]);
@@ -69,115 +77,139 @@ export default function Checklist(): JSX.Element {
     if (selectedRole === JOB_TYPES[3]) setChecklistToShow(FULLSTACK_CHECKLIST);
   };
 
-  const getProgressValue = (checked: string[]): number => {
+  const getProgressValue = (checked: string[]) => {
     const percentage = Number(
       ((checked.length / checklistToShow.length) * 100).toFixed(0)
     );
-
     setPercentageChecked(percentage);
-    if (percentage < 40) {
+    if (percentage <= 40) {
       setEmoji("🤨💩");
       setProgressColor("#ff5e5e");
-    } else if (percentage > 40 && percentage < 70) {
+    } else if (percentage >= 40 && percentage <= 70) {
       setProgressColor("#FFEB3B");
       setEmoji("🙂✨");
-    } else if (percentage > 70) {
+    } else if (percentage >= 70) {
       setProgressColor("#8fff8f");
       setEmoji("😎💪");
     }
-    return percentage;
   };
 
-  return (
-    <>
-      <div className="w-screen flex items-center justify-center flex-col">
-        <main className="grid gap-10 py-10">
-          <div>
-            <h1 className="text-3xl">
-              {showChecklist ? `${selectedRole} checklist` : "what are you?"}
-            </h1>
-            <p>
-              {!showChecklist
-                ? "Select your current role from the options below"
-                : "Choose from below the skills that apply"}
-            </p>
-          </div>
-          {!showChecklist ? (
-            <div className="grid gap-5">
-              <ul className="grid grid-cols-2 gap-5">
-                {JOB_TYPES.map((jobType, index: number) => (
-                  <li key={index}>
-                    <Button
-                      onClick={() => setSelectedRole(jobType)}
-                      className={`py-20 px-10 font-[600] text-xl ${
-                        selectedRole === jobType && "bg-[#000] text-white"
-                      }`}
-                      variant="outline"
-                    >
-                      {jobType}
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                className="rounded-full gap-2 py-7 w-max"
-                onClick={onProceed}
-                disabled={!selectedRole}
-              >
-                let&apos;s do this
-                <ArrowRight color="#FFF" />
-              </Button>
+  async function updateDB(percentage: number) {
+    await axios
+      .post("/api/save", {
+        percentage: percentage,
+        role: selectedRole,
+        uid: user?.id,
+        createdAt: Date.now().toString(),
+        fullName: user?.fullName,
+        photo: user?.imageUrl,
+      })
+      .then((response) => console.log(response))
+      .catch((error) => toast.error(error.message));
+  }
+
+  useEffect(() => {
+    if (isLoaded && !userId) replace(ROUTES.signIn);
+  }, [isLoaded, replace, userId]);
+
+  if (isLoaded)
+    return (
+      <>
+        <div className="w-screen flex items-center justify-center flex-col">
+          <main className="grid gap-10 py-10">
+            <div>
+              <h1 className="text-3xl">
+                {showChecklist ? `${selectedRole} checklist` : "what are you?"}
+              </h1>
+              <p>
+                {!showChecklist
+                  ? "Select your current role from the options below"
+                  : "Choose from below the skills that apply"}
+              </p>
             </div>
-          ) : (
-            <>
-              <Formik
-                initialValues={{
-                  checked: [],
-                }}
-                onSubmit={(values: { checked: string[] }) => console.log(values)}
-              >
-                {({ values }) => (
-                  <Form className="space-y-10">
-                    <div
-                      role="group"
-                      aria-labelledby="checkbox-group"
-                      className="flex flex-col gap-5"
-                    >
-                      {checklistToShow.map((item, index: number) => (
-                        <label
-                          key={index}
-                          className="flex gap-2 items-center cursor-pointer select-none"
-                        >
-                          <Field
-                            className="w-5 h-5 cursor-pointer"
-                            type="checkbox"
-                            name="checked"
-                            value={item}
-                          />
-                          {item}
-                        </label>
-                      ))}
-                    </div>
-                    <div className="space-y-5">
-                      <Progress
-                        //   className={`bg-${progressColor}`}
-                        color={progressColor}
-                        // style={{ background: progressColor }}
-                        value={getProgressValue(values.checked)}
-                      />
-                      {percentageChecked > 0 && (
-                        <h3 className="text-4xl">
-                          {percentageChecked}% <span className="ml-3">{emoji}</span>
-                        </h3>
-                      )}
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-            </>
-          )}
-        </main>
-      </div>
-    </>
-  );
+            {!showChecklist ? (
+              <div className="grid gap-5">
+                <ul className="grid grid-cols-2 gap-5">
+                  {JOB_TYPES.map((jobType, index: number) => (
+                    <li key={index}>
+                      <Button
+                        onClick={() => setSelectedRole(jobType)}
+                        className={`py-20 px-10 font-[600] text-xl ${
+                          selectedRole === jobType && "bg-[#000] text-white"
+                        }`}
+                        variant="outline"
+                      >
+                        {jobType}
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className="rounded-full gap-2 py-7 w-max"
+                  onClick={onProceed}
+                  disabled={!selectedRole}
+                >
+                  let&apos;s do this
+                  <ArrowRight color="#FFF" />
+                </Button>
+              </div>
+            ) : (
+              <div>
+                <Formik
+                  initialValues={{
+                    checked: [],
+                  }}
+                  onSubmit={(values: { checked: string[] }) =>
+                    getProgressValue(values.checked)
+                  }
+                >
+                  {({ values, submitForm, setFieldValue }) => (
+                    <Form className="space-y-10">
+                      <div
+                        role="group"
+                        aria-labelledby="checkbox-group"
+                        className="flex flex-col gap-5"
+                      >
+                        {checklistToShow.map((item, index: number) => (
+                          <label
+                            className="flex gap-2 items-center cursor-pointer select-none"
+                            key={index}
+                          >
+                            <Field
+                              className="w-5 h-5 cursor-pointer"
+                              type="checkbox"
+                              name="checked"
+                              value={item}
+                              onClick={submitForm}
+                            />
+                            {item}
+                          </label>
+                        ))}
+                      </div>
+                      <div className="space-y-5">
+                        <Progress color={progressColor} value={percentageChecked} />
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-3xl">
+                            {percentageChecked}% <span className="ml-3">{emoji}</span>
+                          </h3>
+                          <Button
+                            className="rounded-full"
+                            type="submit"
+                            onClick={() => updateDB(percentageChecked)}
+                          >
+                            Save
+                          </Button>
+                        </div>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            )}
+          </main>
+        </div>
+      </>
+    );
+
+  return <></>;
 }

@@ -1,11 +1,16 @@
-name: test
+name: ci
 on: [push, pull_request]
 jobs:
-  run-tests:
+  run-ci:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
 
       - name: install bun
         run: npm install -g bun
