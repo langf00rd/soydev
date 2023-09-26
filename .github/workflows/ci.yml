@@ -18,6 +18,7 @@ jobs:
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}"
           CLERK_SECRET_KEY: "${{secrets.CLERK_SECRET_KEY}}"
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
 
       - name: lint
         run: bun run lint
