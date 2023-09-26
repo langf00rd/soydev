@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+// const { PrismaClient } = require("@prisma/client");
 import Image from "next/image";
 import Header from "~/components/Header";
 import { Result } from "~/interface";
