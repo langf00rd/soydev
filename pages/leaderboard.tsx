@@ -17,14 +17,14 @@ export default function Leaderboard(): JSX.Element {
         .get("/api/get-results")
         .then((response) => {
           console.log(response.data);
-          setResults(
-            response.data.results.sort(
-              (a: Result, b: Result) => b.percentage - a.percentage
-            )
-          );
+          setResults(response.data.results);
+          setLoading(false);
         })
-        .catch((error) => toast.error(error.message));
-      setLoading(false);
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.message);
+          setLoading(false);
+        });
     })();
   }, []);
 
@@ -38,7 +38,7 @@ export default function Leaderboard(): JSX.Element {
           <ul className="max-w-4xl mx-auto">
             {results.map((result, index: number) => (
               <li key={index} className="p-5 border-b flex items-center justify-between">
-                <h2 className="text-2xl">#10</h2>
+                <h2 className="text-2xl">#{result.rank}</h2>
                 <div className="flex items-center space-x-2 w-full max-w-[700px]">
                   <Image
                     src={result.photo}

@@ -13,4 +13,5 @@ export interface Result {
   photo: string;
   role: string;
   uid: string;
+  rank?: number;
 }
