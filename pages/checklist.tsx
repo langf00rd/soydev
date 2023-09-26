@@ -92,20 +92,19 @@ export default function Checklist(): JSX.Element {
       setProgressColor("#8fff8f");
       setEmoji("😎💪");
     }
-    // updateDB(percentage);
   };
 
   async function updateDB(percentage: number) {
     await axios
-      .post("/api/save-result", {
+      .post("/api/save", {
         percentage: percentage,
         role: selectedRole,
-        uid: userId,
+        uid: user?.id,
         createdAt: Date.now().toString(),
         fullName: user?.fullName,
         photo: user?.imageUrl,
       })
-      .then(() => {})
+      .then((response) => console.log(response))
       .catch((error) => toast.error(error.message));
   }
 
