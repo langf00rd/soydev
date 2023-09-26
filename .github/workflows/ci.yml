@@ -7,6 +7,11 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v4
 
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
       - name: install bun
         run: npm install -g bun
 
