@@ -2,7 +2,8 @@
 // import { NextApiRequest, NextApiResponse } from "next";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
-import prisma from "~/prisma";
+import prisma from "~/lib/prisma";
+// import prisma from "~/prisma";
 // const prisma = new PrismaClient();
 
 const resultSchema = z.object({

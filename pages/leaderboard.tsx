@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Header from "~/components/Header";
 import { Result } from "~/interface";
-import prisma from "~/prisma";
+import prisma from "~/lib/prisma";
+// import prisma from "~/prisma";
 
 export async function getStaticProps() {
   const results = await prisma.result.findMany();
