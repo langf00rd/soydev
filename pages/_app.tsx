@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <Toaster />
-      <Component {...pageProps} />
+      <NextUIProvider>
+        <Component {...pageProps} />
+      </NextUIProvider>
     </ClerkProvider>
   );
 }
