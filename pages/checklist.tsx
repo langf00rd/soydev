@@ -120,7 +120,7 @@ export default function ChecklistPage(): JSX.Element {
         <div className="flex items-center justify-center px-5">
           <main className="max-w-4xl w-full py-10 mx-auto space-y-10">
             <div>
-              <h1 className="text-2xl md:text-4xl">
+              <h1 className="text-2xl md:text-3xl">
                 {showChecklist
                   ? `${selectedRole} checklist`
                   : "what is your current role?"}
@@ -145,7 +145,7 @@ export default function ChecklistPage(): JSX.Element {
                         onClick={() => setSelectedRole(jobType.title)}
                         className={`font-[600] text-xl w-full py-10 space-x-2 ${
                           selectedRole === jobType.title &&
-                          "border-2 border-primary text-white"
+                          "border-2 border-primary bg-primary text-white"
                         }`}
                         variant="outline"
                       >
@@ -228,7 +228,7 @@ export function CheckListItem(props: {
 }): JSX.Element {
   const [showChildren, setShowChildren] = useState(false);
   return (
-    <div className="border-b pb-3">
+    <div className="pb-3">
       {!props.listItem.hasChildren ? (
         <label className={styles.listItem} onClick={props.submitForm}>
           <Field
@@ -257,14 +257,14 @@ export function CheckListItem(props: {
             <p className={styles.listItemLabel}>{props.listItem.label}</p>
           </div>
           {showChildren && (
-            <div className="ml-5 space-y-2 mt-3">
-              <p className="md:text-xl">{props.listItem.childrenLabel}</p>
-              <motion.ul
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                className="space-y-5"
-              >
+            <motion.div
+              className="ml-2 space-y-5 mt-3 border-l border-dashed pl-5"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <p className="md:text-xl opacity-50">{props.listItem.childrenLabel}</p>
+              <motion.ul className="space-y-5">
                 {props.listItem.children?.map((child, index: number) => (
                   <li key={index}>
                     <label className={styles.listItem} onClick={props.submitForm}>
@@ -279,7 +279,7 @@ export function CheckListItem(props: {
                   </li>
                 ))}
               </motion.ul>
-            </div>
+            </motion.div>
           )}
         </>
       )}

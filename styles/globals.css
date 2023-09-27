@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 html {
-  @apply min-h-screen leading-[1.7] bg-background;
+  @apply min-h-screen leading-[1.7] bg-background text-textAccent1;
 }
 
 * {
-  @apply p-0 m-0 box-border tracking-tight text-textAccent1 antialiased list-none;
+  @apply p-0 m-0 box-border tracking-tight antialiased list-none;
 }
 
 h1,

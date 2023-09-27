@@ -1,4 +1,4 @@
-# project Setup Guide
+# project setup guide
 
 welcome to the soydev! we use the `bun` as the main package manager for this project. Follow the steps below to set up your development environment:
 

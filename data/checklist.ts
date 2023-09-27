@@ -160,7 +160,6 @@ export const FRONTEND_CHECKLIST: Checklist[] = [
   },
 ];
 
-
 export const BACKEND_CHECKLIST: Checklist[] = [
   {
     label: "Version control (e.g., Git)",
@@ -297,7 +296,6 @@ export const FULLSTACK_CHECKLIST: Checklist[] = [
   { label: "Kubernetes (optional)", hasChildren: false },
   { label: "Nginx or Apache server configuration", hasChildren: false },
 ];
-
 
 export const UI_UX_CHECKLIST = [
   {

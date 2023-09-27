@@ -55,6 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           data: {
             percentage: body.percentage,
             createdAt: body.createdAt,
+            checklist: body.checklist,
             role: body.role,
             fullName: body.fullName,
             photo: body.photo,
