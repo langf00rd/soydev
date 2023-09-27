@@ -2,36 +2,164 @@ import { Checklist } from "~/interface";
 
 export const FRONTEND_CHECKLIST: Checklist[] = [
   {
-    label: "Version control (e.g., Git)",
+    label: "HTML (HyperText Markup Language)",
     hasChildren: true,
-    childrenLabel: "So how many times?",
-    children: ["Are you sure?", "Yes i am", "No you are not"],
+    childrenLabel: "Frontend Developer Proficiency in HTML",
+    children: [
+      "Properly structure HTML documents using headings, paragraphs, lists, and other elements.",
+      "Create forms with input fields, labels, and form validation.",
+      "Embed multimedia content, such as images, audio, and video.",
+      "Understand semantic HTML to improve accessibility and SEO.",
+      "Use HTML5 features like local storage and web workers for offline capabilities.",
+    ],
   },
   {
-    label: "Proficiency in both frontend and backend technologies",
-    hasChildren: false,
-  },
-  {
-    label: "Agile development and project management skills",
-    hasChildren: false,
-  },
-  {
-    label: "Troubleshooting and debugging skills for the entire application stack",
+    label: "CSS (Cascading Style Sheets)",
     hasChildren: true,
-    childrenLabel: "Incase of an emergency?",
-    children: ["Are you sure?", "Yes i am", "No you are not"],
+    childrenLabel: "Frontend Developer Proficiency in CSS",
+    children: [
+      "Apply CSS styles to HTML elements for layout and presentation.",
+      "Understand the box model and manage element dimensions and spacing.",
+      "Work with CSS selectors to target specific elements.",
+      "Use Flexbox and CSS Grid for responsive layouts.",
+      "Implement animations and transitions with CSS.",
+    ],
   },
   {
-    label: "Strong communication skills for collaborating with cross-functional teams",
-    hasChildren: false,
-  },
-  {
-    label: "Experience with integrating frontend and backend components",
+    label: "JavaScript",
     hasChildren: true,
-    childrenLabel: "Are you sure?",
-    children: ["Are you sure?", "Yes i am", "No you are not"],
+    childrenLabel: "Frontend Developer Proficiency in JavaScript",
+    children: [
+      "Write JavaScript code to handle user interactions and dynamic content.",
+      "Manipulate the Document Object Model (DOM) to update web page content.",
+      "Work with asynchronous operations, such as fetching data from APIs.",
+      "Implement client-side form validation.",
+      "Debug and troubleshoot JavaScript code effectively.",
+    ],
+  },
+  {
+    label: "Responsive Web Design",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Responsive Web Design",
+    children: [
+      "Create responsive web designs that adapt to different screen sizes.",
+      "Use media queries to apply styles based on device characteristics.",
+      "Optimize images and assets for various devices and resolutions.",
+    ],
+  },
+  {
+    label: "Version Control/Git",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Version Control/Git",
+    children: [
+      "Use Git for version control to track changes in code.",
+      "Collaborate with other developers using Git repositories.",
+    ],
+  },
+  {
+    label: "Web Performance Optimization",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Web Performance Optimization",
+    children: [
+      "Optimize web assets for faster loading times.",
+      "Minify and compress CSS, JavaScript, and images.",
+      "Leverage browser caching and lazy loading techniques.",
+    ],
+  },
+  {
+    label: "Cross-Browser Compatibility",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Cross-Browser Compatibility",
+    children: [
+      "Ensure web applications work consistently across different web browsers.",
+      "Identify and address browser-specific issues and quirks.",
+    ],
+  },
+  {
+    label: "Accessibility (a11y)",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Accessibility",
+    children: [
+      "Create accessible web content by following WAI-ARIA guidelines.",
+      "Use semantic HTML and provide alternative text for images.",
+      "Implement keyboard navigation and focus management.",
+    ],
+  },
+  {
+    label: "Build Tools and Task Runners",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Build Tools and Task Runners",
+    children: [
+      "Set up and configure build tools like Webpack or Gulp.",
+      "Automate repetitive tasks, such as code minification and bundling.",
+    ],
+  },
+  {
+    label: "Frameworks and Libraries",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Familiarity with Frameworks and Libraries",
+    children: [
+      "Familiarity with popular frontend libraries/frameworks like React, Vue.js, or Angular.",
+      "Understand component-based architecture.",
+    ],
+  },
+  {
+    label: "Testing",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Testing",
+    children: [
+      "Write unit tests and perform integration testing using tools like Jest or Cypress.",
+    ],
+  },
+  {
+    label: "Package Managers",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Package Managers",
+    children: ["Use package managers like npm or Yarn to manage project dependencies."],
+  },
+  {
+    label: "Security",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Awareness of Security",
+    children: [
+      "Be aware of common web security vulnerabilities, such as Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF).",
+    ],
+  },
+  {
+    label: "Browser Developer Tools",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Browser Developer Tools",
+    children: [
+      "Proficiently use browser developer tools for debugging and performance analysis.",
+    ],
+  },
+  {
+    label: "Progressive Web Apps (PWAs)",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Proficiency in Progressive Web Apps (PWAs)",
+    children: [
+      "Develop Progressive Web Apps that offer offline functionality and can be installed on devices.",
+    ],
+  },
+  {
+    label: "Web APIs",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Utilization of Web APIs",
+    children: [
+      "Utilize browser APIs for features like geolocation, push notifications, and service workers.",
+    ],
+  },
+  {
+    label: "Code Quality and Best Practices",
+    hasChildren: true,
+    childrenLabel: "Frontend Developer Adherence to Code Quality and Best Practices",
+    children: [
+      "Follow coding conventions and best practices for maintainable and scalable code.",
+      "Conduct code reviews and collaborate effectively with other team members.",
+    ],
   },
 ];
+
 
 export const BACKEND_CHECKLIST: Checklist[] = [
   {
