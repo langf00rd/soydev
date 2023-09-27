@@ -3,6 +3,9 @@ import type { AppProps } from "next/app";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
 import { NextUIProvider } from "@nextui-org/react";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
     >
       <Toaster />
       <NextUIProvider>
-        <Component {...pageProps} />
+        <div className={`${inter.className}`}>
+          <Component {...pageProps} />
+        </div>
       </NextUIProvider>
     </ClerkProvider>
   );
