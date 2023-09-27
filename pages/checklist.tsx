@@ -21,6 +21,7 @@ import {
   FRONTEND_CHECKLIST,
   BACKEND_CHECKLIST,
   FULLSTACK_CHECKLIST,
+  UI_UX_CHECKLIST,
 } from "~/data/checklist";
 import { Checklist, JobType } from "~/interface";
 import Header from "~/components/Header";
@@ -71,6 +72,7 @@ export default function ChecklistPage(): JSX.Element {
     if (selectedRole === JOB_TYPES[0].title) setChecklistToShow(FRONTEND_CHECKLIST);
     if (selectedRole === JOB_TYPES[2].title) setChecklistToShow(BACKEND_CHECKLIST);
     if (selectedRole === JOB_TYPES[3].title) setChecklistToShow(FULLSTACK_CHECKLIST);
+    if (selectedRole === JOB_TYPES[4].title) setChecklistToShow(UI_UX_CHECKLIST);
   };
 
   const updateProgress = (checked: string[]) => {
