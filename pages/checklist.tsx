@@ -179,7 +179,7 @@ export default function ChecklistPage(): JSX.Element {
                       <div
                         role="group"
                         aria-labelledby="checkbox-group"
-                        className="flex flex-col gap-5"
+                        className="flex flex-col gap-5 mb-44"
                       >
                         {checklistToShow.map((listItem, index: number) => {
                           return (
@@ -192,17 +192,22 @@ export default function ChecklistPage(): JSX.Element {
                         })}
                       </div>
                     </Form>
-                    {percentageChecked > 0 && (
-                      <Progress color={progressColor} value={percentageChecked} />
-                    )}
-                    <Button
-                      disabled={percentageChecked <= 0}
-                      onClick={() => updateDB(percentageChecked)}
-                      className="bg-[#000] text-[#FFF]"
-                      variant="outline"
-                    >
-                      {loading ? <Loader /> : "Save"}
-                    </Button>
+                    <div className="fixed bottom-0 left-0 bg-white flex items-center justify-between p-5 w-screen border-t">
+                      <div className="max-w-4xl mx-auto w-full flex items-center justify-between space-x-5">
+                        {percentageChecked > 0 && (
+                          <Progress color={progressColor} value={percentageChecked} />
+                        )}
+                        <h2 className="text-xl">{percentageChecked}%</h2>
+                        <Button
+                          disabled={percentageChecked <= 0}
+                          onClick={() => updateDB(percentageChecked)}
+                          className="bg-[#000] text-[#FFF]"
+                          variant="outline"
+                        >
+                          {loading ? <Loader /> : "Save"}
+                        </Button>
+                      </div>
+                    </div>
                   </>
                 )}
               </Formik>
