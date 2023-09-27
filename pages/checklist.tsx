@@ -27,22 +27,27 @@ import Header from "~/components/Header";
 
 const JOB_TYPES: JobType[] = [
   {
+    id: 0.1,
     title: "frontend developer",
     icon: <Asterisk />,
   },
   {
+    id: 0.2,
     title: "software engineer",
     icon: <TrainTrack />,
   },
   {
+    id: 0.3,
     title: "backend developer",
     icon: <Cable />,
   },
   {
+    id: 0.4,
     title: "fullstack developer",
     icon: <Laptop2 />,
   },
   {
+    id: 0.5,
     title: "UI & UX designer",
     icon: <MousePointerSquare />,
   },
@@ -110,7 +115,7 @@ export default function ChecklistPage(): JSX.Element {
     return (
       <>
         <Header />
-        <div className="min-w-screen min-h-screen flex items-center justify-center px-5">
+        <div className="flex items-center justify-center px-5">
           <main className="max-w-4xl w-full py-10 mx-auto space-y-10">
             <div>
               <h1 className="text-2xl md:text-4xl">
@@ -127,8 +132,13 @@ export default function ChecklistPage(): JSX.Element {
             {!showChecklist ? (
               <div className="space-y-10">
                 <ul className="gap-3 grid grid-cols-2 w-full">
-                  {JOB_TYPES.map((jobType, index: number) => (
-                    <li key={index}>
+                  {JOB_TYPES.map((jobType) => (
+                    <motion.li
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: jobType.id }}
+                      key={jobType.id}
+                    >
                       <Button
                         onClick={() => setSelectedRole(jobType.title)}
                         className={`font-[600] text-xl w-full py-10 space-x-2 ${
@@ -140,7 +150,7 @@ export default function ChecklistPage(): JSX.Element {
                         <div>{jobType.icon}</div>
                         <p>{jobType.title}</p>
                       </Button>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
                 <Button
@@ -211,7 +221,7 @@ export function CheckListItem(props: {
 }): JSX.Element {
   const [showChildren, setShowChildren] = useState(false);
   return (
-    <div>
+    <div className="border-b pb-3">
       {!props.listItem.hasChildren ? (
         <label className={styles.listItem} onClick={props.submitForm}>
           <Field

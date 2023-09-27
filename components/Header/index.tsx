@@ -2,8 +2,10 @@ import { Bean, Github } from "lucide-react";
 import ROUTES from "~/routes";
 import Link from "next/link";
 import { SignedIn, UserButton } from "@clerk/nextjs";
+import { useRouter } from "next/router";
 
 export default function Header(): JSX.Element {
+  const { pathname } = useRouter();
   return (
     <header className="h-[100px] px-5">
       <div className="max-w-4xl w-full mx-auto h-full flex items-center justify-between">
@@ -18,19 +20,25 @@ export default function Header(): JSX.Element {
             <li>
               <Link
                 href={ROUTES.leaderboard}
-                className="hover:underline hover:text-[#000]"
+                className={
+                  pathname === ROUTES.leaderboard
+                    ? "underline"
+                    : "hover:underline hover:text-[#000]"
+                }
               >
                 <p>leaderboard</p>
               </Link>
             </li>
             <li>
-              <Link href={ROUTES.checklist} className="hover:underline hover:text-[#000]">
+              <Link
+                href={ROUTES.checklist}
+                className={
+                  pathname === ROUTES.checklist
+                    ? "underline"
+                    : "hover:underline hover:text-[#000]"
+                }
+              >
                 <p>use checklist</p>
-              </Link>
-            </li>
-            <li>
-              <Link href={ROUTES.questions} className="hover:underline hover:text-[#000]">
-                <p>use q&a</p>
               </Link>
             </li>
           </ul>
