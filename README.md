@@ -28,11 +28,19 @@ bunx prisma generate
 
 this command will generate prisma client based on the schema.
 
-## [5] create a pull request
+## [5] running the app
+
+to run the app in your local dev environment. use this command
+
+```bash
+bun dev
+```
+
+## [6] create a pull request
 
 once you've made your changes, push your branch to your forked repository. then, create a PR to the `dev` branch of the original repository (not the `main` branch). please note that all PRs must target the `dev` branch for review.
 
-## [6] CI/CD Checks
+## [7] CI/CD Checks
 
 your PR will be reviewed and merged only when all CI checks have passed. ensure that your code meets the project's coding standards and that all tests are passing.
 
