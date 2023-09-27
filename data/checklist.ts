@@ -297,3 +297,101 @@ export const FULLSTACK_CHECKLIST: Checklist[] = [
   { label: "Kubernetes (optional)", hasChildren: false },
   { label: "Nginx or Apache server configuration", hasChildren: false },
 ];
+
+
+export const UI_UX_CHECKLIST = [
+  {
+    label: "Proficiency in UI/UX design principles and best practices",
+    hasChildren: false,
+  },
+  {
+    label: "User-Centered Design",
+    hasChildren: true,
+    childrenLabel: "Demonstrate user-centered design in your work",
+    children: ["Always", "Mostly", "Sometimes", "Rarely"],
+  },
+  {
+    label: "Wireframing and Prototyping",
+    hasChildren: true,
+    childrenLabel: "Level of expertise in wireframing and prototyping",
+    children: ["Expert", "Proficient", "Competent", "Basic"],
+  },
+  {
+    label: "Visual Design Skills",
+    hasChildren: true,
+    childrenLabel: "Mastery of visual design, typography, and color theory",
+    children: ["Mastery", "Proficient", "Competent", "Basic"],
+  },
+  {
+    label: "Design Tools Proficiency",
+    hasChildren: true,
+    childrenLabel: "Proficiency with design tools (e.g., Figma, Sketch)",
+    children: ["Figma", "Sketch", "Adobe XD", "Photoshop", "Illustrator", "Other"],
+  },
+  {
+    label: "User Research and Testing",
+    hasChildren: true,
+    childrenLabel: "Engagement in user research and usability testing",
+    children: ["Frequent", "Occasional", "Rare", "None"],
+  },
+  {
+    label: "Information Architecture",
+    hasChildren: true,
+    childrenLabel: "Knowledge and application of information architecture",
+    children: ["Strong", "Adequate", "Limited", "None"],
+  },
+  {
+    label: "Interaction Design",
+    hasChildren: true,
+    childrenLabel: "Proficiency in interaction design and microinteractions",
+    children: ["Expert", "Proficient", "Competent", "Basic"],
+  },
+  {
+    label: "Responsive Design",
+    hasChildren: true,
+    childrenLabel: "Ability to create responsive and mobile-first designs",
+    children: ["Expert", "Proficient", "Competent", "Basic"],
+  },
+  {
+    label: "Accessibility (a11y) Design",
+    hasChildren: true,
+    childrenLabel: "Consideration of accessibility in design",
+    children: ["Highly Considerate", "Considerate", "Limited", "None"],
+  },
+  {
+    label: "Collaboration with Developers",
+    hasChildren: true,
+    childrenLabel: "Efficient collaboration with development teams",
+    children: ["Efficient", "Moderate", "Limited", "None"],
+  },
+  {
+    label: "Design Portfolio",
+    hasChildren: true,
+    childrenLabel: "Availability of a design portfolio",
+    children: ["Available", "Not Available"],
+  },
+  {
+    label: "Communication and Collaboration Skills",
+    hasChildren: false,
+  },
+  {
+    label: "Design System Usage",
+    hasChildren: false,
+  },
+  {
+    label: "User Personas and Journeys",
+    hasChildren: false,
+  },
+  {
+    label: "Design Consistency",
+    hasChildren: false,
+  },
+  {
+    label: "Design Thinking and Problem-Solving",
+    hasChildren: false,
+  },
+  {
+    label: "Animation and Motion Design",
+    hasChildren: false,
+  },
+];
