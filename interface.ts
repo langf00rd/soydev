@@ -26,6 +26,7 @@ export interface Checklist {
 }
 
 export interface JobType {
+  id: number;
   title: string;
   icon: ReactNode;
 }
