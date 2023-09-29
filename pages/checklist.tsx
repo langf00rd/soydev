@@ -25,6 +25,7 @@ import {
 } from "~/data/checklist";
 import { Checklist, JobType } from "~/interface";
 import Header from "~/components/Header";
+import Link from "next/link";
 
 const JOB_TYPES: JobType[] = [
   {
@@ -143,9 +144,9 @@ export default function ChecklistPage(): JSX.Element {
                     >
                       <Button
                         onClick={() => setSelectedRole(jobType.title)}
-                        className={`font-[600] text-xl w-full py-10 space-x-2 ${
+                        className={`font-[600] text-xl w-full py-10 space-x-2 border-2 ${
                           selectedRole === jobType.title &&
-                          "border-2 border-primary bg-primary text-white"
+                          "border-primary bg-primary text-white"
                         }`}
                         variant="outline"
                       >
@@ -155,15 +156,23 @@ export default function ChecklistPage(): JSX.Element {
                     </motion.li>
                   ))}
                 </ul>
-                <Button
-                  onClick={onProceed}
-                  disabled={!selectedRole}
-                  variant="ghost"
-                  className="text-xl gap-2 -ml-4"
-                >
-                  continue
-                  <ArrowRight />
-                </Button>
+                <div className="flex items-center space-x-10 justify-end">
+                  <Button
+                    variant="ghost"
+                    className="text-md scale-[1.2]"
+                    onClick={() => window.history.back()}
+                  >
+                    cancel
+                  </Button>
+                  <Button
+                    onClick={onProceed}
+                    disabled={!selectedRole}
+                    className="text-md scale-[1.2] bg-black rounded-full"
+                  >
+                    continue
+                    <ArrowRight size={18} />
+                  </Button>
+                </div>
               </div>
             ) : (
               <Formik
@@ -257,16 +266,16 @@ export function CheckListItem(props: {
             <p className={styles.listItemLabel}>{props.listItem.label}</p>
           </div>
           {showChildren && (
-            <motion.div
-              className="ml-2 space-y-5 mt-3 border-l border-dashed pl-5"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-            >
+            <div className="ml-2 space-y-5 mt-3 border-l border-dashed pl-5">
               <p className="md:text-xl opacity-50">{props.listItem.childrenLabel}</p>
               <motion.ul className="space-y-5">
                 {props.listItem.children?.map((child, index: number) => (
-                  <li key={index}>
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index / 20 }}
+                  >
                     <label className={styles.listItem} onClick={props.submitForm}>
                       <Field
                         type="checkbox"
@@ -276,10 +285,10 @@ export function CheckListItem(props: {
                       />
                       <p className={styles.listItemLabel}>{child}</p>
                     </label>
-                  </li>
+                  </motion.li>
                 ))}
               </motion.ul>
-            </motion.div>
+            </div>
           )}
         </>
       )}

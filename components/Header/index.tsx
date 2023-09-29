@@ -29,18 +29,6 @@ export default function Header(): JSX.Element {
                 <p>leaderboard</p>
               </Link>
             </li>
-            <li>
-              <Link
-                href={ROUTES.checklist}
-                className={
-                  pathname === ROUTES.checklist
-                    ? "underline"
-                    : "hover:underline hover:text-[#000]"
-                }
-              >
-                <p>use checklist</p>
-              </Link>
-            </li>
           </ul>
         </nav>
         <div className="flex items-center gap-5">

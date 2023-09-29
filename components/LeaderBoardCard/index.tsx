@@ -29,7 +29,7 @@ export default function LeaderBoardCard(props: {
             width={40}
             height={40}
             alt={`${props.result.fullName}'s photo`}
-            className="rounded-full w-[42px] h-[40px] object-cover"
+            className="rounded-full w-[42px] h-[40px] object-cover bg-gray-100"
           />
         </div>
         <p className="flex w-full justify-between items-center">
