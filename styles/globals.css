@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply min-h-screen leading-[1.7] bg-background text-textAccent1;
+body {
+  @apply min-h-screen leading-[1.7] text-textAccent1;
 }
 
 * {
@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-[#000] font-[600];
+  @apply text-[#000] font-[600] leading-[1];
 }
 
 .loader {
