@@ -13,7 +13,7 @@ export default function JobTypeButton(props: JobTypeButtonProps): JSX.Element {
       <Button
         disabled={props.isComingSoon}
         onClick={() => props.onSelect(props.title)}
-        className={`font-[600] text-xl w-full py-10 space-x-2 border-2 relative ${
+        className={`font-[600] text-xl w-full py-14 space-x-2 border-2 relative ${
           props.selectedRole === props.title && "border-primary bg-primary text-white"
         }`}
         variant="outline"
