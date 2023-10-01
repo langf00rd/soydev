@@ -9,7 +9,7 @@ export interface Question {
 
 export interface Result {
   createdAt: string;
-  fullName: string;
+  name: string;
   id: string;
   percentage: number;
   photo: string;
@@ -29,4 +29,17 @@ export interface JobType {
   id: number;
   title: string;
   icon: ReactNode;
+  isComingSoon?: boolean;
+}
+
+export interface ProgressFooterProps {
+  selectedRole: string;
+  checkedItems: string[];
+  percentage: number;
+  progressColor: string;
+}
+
+export interface JobTypeButtonProps extends JobType {
+  selectedRole: string;
+  onSelect: (title: string) => void;
 }

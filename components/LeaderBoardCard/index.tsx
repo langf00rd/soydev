@@ -28,12 +28,12 @@ export default function LeaderBoardCard(props: {
             src={props.result.photo}
             width={40}
             height={40}
-            alt={`${props.result.fullName}'s photo`}
+            alt={`${props.result.name}'s photo`}
             className="rounded-full w-[42px] h-[40px] object-cover bg-gray-100"
           />
         </div>
         <p className="flex w-full justify-between items-center">
-          <span className="text-[#000] font-[600]">{props.result.fullName}</span>
+          <span className="text-[#000] font-[600]">{props.result.name}</span>
           <span className="border p-1 px-2 ml-2 rounded-md text-sm">
             {props.result.role}
           </span>
