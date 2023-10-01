@@ -56,7 +56,7 @@ export default function ChecklistPage(): JSX.Element {
             />
           ) : (
             <div className="space-y-10">
-              <ul className="gap-3 grid grid-cols-2 w-full">
+              <ul className="gap-3 grid md:grid-cols-2 w-full">
                 {JOB_TYPES.map((jobType) => (
                   <JobTypeButton
                     key={jobType.id}

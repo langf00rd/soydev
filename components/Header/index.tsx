@@ -15,7 +15,7 @@ export default function Header(): JSX.Element {
             soydev
           </h2>
         </Link>
-        <nav className="hidden md:block">
+        <nav>
           <ul className="flex items-center justify-center w-full gap-5">
             <li>
               <Link

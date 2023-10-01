@@ -24,7 +24,7 @@ export default function Home() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-center max-w-xl mx-auto"
+          className="text-center max-w-xl mx-auto px-10"
         >
           <p className="font-[500] text-[#000]">
             soydev [ soy - dev ] <i>noun</i>
