@@ -1,18 +1,25 @@
+import { getAuth } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/nextjs";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 import prisma from "~/prisma";
 
 const resultSchema = z.object({
-  uid: z.string(),
   createdAt: z.string(),
   percentage: z.number(),
   checklist: z.array(z.string()),
   role: z.string(),
-  fullName: z.string(),
-  photo: z.string(),
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { userId } = getAuth(req);
+  const user = userId ? await clerkClient.users.getUser(userId) : null;
+
+  if (!userId || !user) {
+    res.status(401).json({ error: "unauthorized" });
+    return;
+  }
+
   try {
     console.log(req.body);
     const validation = resultSchema.safeParse(req.body);
@@ -20,46 +27,43 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!validation.success) {
       res.status(400).json({ error: validation.error.issues });
     } else {
-      console.log(body);
+      // get doc from db
       let doc = await prisma.result.findMany({
         where: {
           uid: {
-            equals: body.uid,
+            equals: user.id,
           },
         },
       });
+
+      const data = {
+        percentage: body.percentage,
+        createdAt: body.createdAt,
+        checklist: body.checklist,
+        role: body.role,
+        name: user.firstName as string,
+        photo: user.imageUrl,
+        uid: user.id,
+      };
+
+      // when doc does not exist create the doc in db
       if (!doc[0]) {
-        console.log("creating");
         await prisma.result.create({
-          data: {
-            uid: body.uid,
-            percentage: body.percentage,
-            createdAt: body.createdAt,
-            checklist: body.checklist,
-            role: body.role,
-            fullName: body.fullName,
-            photo: body.photo,
-          },
+          data: { ...data },
         });
       } else {
+        // if doc exists, update the doc with the request body
         console.log("updating");
         await prisma.result.update({
           where: {
             id: doc[0].id,
             OR: [
               {
-                uid: { equals: body.uid },
+                uid: { equals: user.id },
               },
             ],
           },
-          data: {
-            percentage: body.percentage,
-            createdAt: body.createdAt,
-            checklist: body.checklist,
-            role: body.role,
-            fullName: body.fullName,
-            photo: body.photo,
-          },
+          data: data,
         });
       }
       res.status(200).json({ message: "db updated" });

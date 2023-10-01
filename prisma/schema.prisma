@@ -1,6 +1,6 @@
 generator client {
     provider = "prisma-client-js"
-    output   = "../prisma/generated/client"
+    output   = "../prisma/client"
 }
 
 datasource db {
@@ -15,6 +15,6 @@ model Result {
     createdAt  String
     checklist  String[]
     role       String
-    fullName   String
+    name       String
     photo      String
 }

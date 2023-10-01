@@ -1,5 +1,5 @@
 import { ClassValue } from "class-variance-authority/types";
-import cn from "~/utils/cn.util";
+import cn from "~/lib/utils/cn.util";
 
 export default function Loader(props: { className?: ClassValue }): JSX.Element {
   return (

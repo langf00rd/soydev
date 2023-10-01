@@ -1,10 +1,10 @@
 import Header from "~/components/Header";
 import { Result } from "~/interface";
-import prisma from "~/prisma";
 import LeaderBoardCard from "~/components/LeaderBoardCard";
 import Link from "next/link";
 import ROUTES from "~/routes";
 import { Button } from "~/components/ui/Button";
+import prisma from "~/prisma";
 
 export async function getServerSideProps() {
   const results = await prisma.result.findMany();
@@ -14,7 +14,6 @@ export async function getServerSideProps() {
   const sortedResultsWithRanks = sortedResults.map((o: Result, i: number) =>
     Object.assign(o, { rank: i + 1 })
   );
-
   return {
     props: { results: sortedResultsWithRanks },
   };
