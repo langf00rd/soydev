@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-[#000] font-[600] leading-[1];
+  @apply text-[#000] font-[600];
 }
 
 .loader {

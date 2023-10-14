@@ -16,7 +16,7 @@ export default function Home() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="text-2xl md:text-[2.5rem] text-center mt-20"
+          className="text-2xl md:text-[3.3rem] leading-[50px] text-center mt-20"
         >
           discover and unlock your true potential
         </motion.h1>
@@ -33,7 +33,8 @@ export default function Home() {
             &ldquo;A &lsquo;programmer&rsquo; that works at a bich tech company and only
             knows javascript and HTML. They love IDEs like Visual Studio Code and
             inefficient frameworks that slow their code down...&rdquo; -
-            <Link
+            <br />
+	    <Link className="underline"
               rel="noreferrer"
               href="https://www.urbandictionary.com/define.php?term=Soydev"
               target="_blank"
@@ -52,7 +53,7 @@ export default function Home() {
             <Link href={ROUTES.signIn}>
               <Button
                 variant="link"
-                className="rounded-full scale-[1.1] text-md bg-[#000] text-[#fff]"
+                className="rounded-full text-md bg-[#000] text-[#fff]"
               >
                 Get started &nbsp;
                 <ArrowRight size={18} />
@@ -61,10 +62,10 @@ export default function Home() {
           ) : (
             <Link href={ROUTES.checklist}>
               <Button
-                variant="link"
-                className="rounded-full scale-[1.1] text-md bg-[#000] text-[#fff]"
+                //variant="link"
+                className="text-[#fff]"
               >
-                🔥 use checklist 🔥
+                use checklist 🔥
               </Button>
             </Link>
           )}

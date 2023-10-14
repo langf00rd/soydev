@@ -1,15 +1,8 @@
 import { getAuth } from "@clerk/nextjs/server";
 import { clerkClient } from "@clerk/nextjs";
 import { NextApiRequest, NextApiResponse } from "next";
-import { z } from "zod";
 import prisma from "~/prisma";
-
-const resultSchema = z.object({
-  createdAt: z.string(),
-  percentage: z.number(),
-  checklist: z.array(z.string()),
-  role: z.string(),
-});
+import { resultSchema } from "~/lib/schema";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { userId } = getAuth(req);
@@ -66,9 +59,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           data: data,
         });
       }
-      res.status(200).json({ message: "db updated" });
+      res.status(200).json({ message: "database updated with entry" });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error });
   }
 }

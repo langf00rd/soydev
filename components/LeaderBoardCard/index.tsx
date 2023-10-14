@@ -1,10 +1,10 @@
 import { CircularProgress } from "@nextui-org/react";
 import Image from "next/image";
-import { Result } from "~/interface";
+import { Entry } from "~/interface";
 import { motion } from "framer-motion";
 
 export default function LeaderBoardCard(props: {
-  result: Result;
+  result: Entry;
   index: number;
 }): JSX.Element {
   return (

@@ -1,5 +1,5 @@
 import Header from "~/components/Header";
-import { Result } from "~/interface";
+import { Entry } from "~/interface";
 import LeaderBoardCard from "~/components/LeaderBoardCard";
 import Link from "next/link";
 import ROUTES from "~/routes";
@@ -8,10 +8,8 @@ import prisma from "~/prisma";
 
 export async function getServerSideProps() {
   const results = await prisma.result.findMany();
-  const sortedResults = results.sort(
-    (a: Result, b: Result) => b.percentage - a.percentage
-  );
-  const sortedResultsWithRanks = sortedResults.map((o: Result, i: number) =>
+  const sortedResults = results.sort((a: Entry, b: Entry) => b.percentage - a.percentage);
+  const sortedResultsWithRanks = sortedResults.map((o: Entry, i: number) =>
     Object.assign(o, { rank: i + 1 })
   );
   return {
@@ -19,7 +17,7 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Leaderboard(props: { results: Result[] }): JSX.Element {
+export default function Leaderboard(props: { results: Entry[] }): JSX.Element {
   return (
     <>
       <Header />
