@@ -69,7 +69,7 @@ export function CheckListItem(props: {
 }
 
 const styles = {
-  listItem: "flex items-center space-x-2 select-none",
+  listItem: "flex items-center cursor-pointer hover:opacity-50 transition-all space-x-2 select-none",
   checkbox: "h-4 w-4",
   listItemLabel: "text-md md:text-xl text-[#000]",
 };

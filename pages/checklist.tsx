@@ -1,20 +1,42 @@
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/Button";
 import {
   FRONTEND_CHECKLIST,
   FULLSTACK_CHECKLIST,
   UI_UX_CHECKLIST,
-} from "~/lib/data/checklist";
-import { Checklist } from "~/interface";
+} from "~/lib/constants/checklist";
+import { Checklist, Entry } from "~/interface";
 import Header from "~/components/Header";
-import { JOB_TYPES } from "~/lib/data";
+import { JOB_TYPES } from "~/lib/constants";
 import JobTypeButton from "~/components/JobTypeButton";
 import CheckListForm from "~/components/CheckListForm";
+import axios from "axios";
+import  { toast } from "sonner";
 
 export default function ChecklistPage(): JSX.Element {
   const [selectedRole, setSelectedRole] = useState("");
   const [checklistToShow, setChecklistToShow] = useState<Checklist[]>([]);
+  const [checked, setChecked] = useState<string[]>([]);
+
+  async function getUserEntryFromDB(): Promise<Entry | undefined> {
+    try {
+      const result = await axios.post("/api/get-user-entry");
+      return result.data.data as Entry;
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }
+
+  useEffect(() => {
+    (async () => {
+      const entry = await getUserEntryFromDB();
+      if (!entry) return;
+      console.log(entry);
+      setSelectedRole(entry.role);
+      setChecked(entry.checklist);
+    })();
+  }, []);
 
   const onProceed = () => {
     switch (selectedRole) {
@@ -51,6 +73,7 @@ export default function ChecklistPage(): JSX.Element {
           </div>
           {checklistToShow.length > 0 ? (
             <CheckListForm
+              checked={checked}
               checklistToShow={checklistToShow}
               selectedRole={selectedRole}
             />
@@ -70,18 +93,10 @@ export default function ChecklistPage(): JSX.Element {
                 ))}
               </ul>
               <div className="flex items-center space-x-10 justify-end">
-                <Button
-                  variant="ghost"
-                  className="text-md scale-[1.2]"
-                  onClick={() => window.history.back()}
-                >
+                <Button variant="ghost" onClick={() => window.history.back()}>
                   cancel
                 </Button>
-                <Button
-                  onClick={onProceed}
-                  disabled={!selectedRole}
-                  className="text-md scale-[1.2] bg-black rounded-full"
-                >
+                <Button onClick={onProceed} disabled={!selectedRole}>
                   continue
                   <ArrowRight size={18} />
                 </Button>

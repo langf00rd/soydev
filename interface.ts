@@ -7,7 +7,7 @@ export interface Question {
   isMultiChoice: boolean;
 }
 
-export interface Result {
+export interface Entry {
   createdAt: string;
   name: string;
   id: string;
@@ -16,6 +16,7 @@ export interface Result {
   role: string;
   uid: string;
   rank?: number;
+  checklist: string[];
 }
 
 export interface Checklist {
