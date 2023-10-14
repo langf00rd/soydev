@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-screen leading-[1.7] text-textAccent1;
+  @apply min-h-screen text-textAccent1;
+}
+
+p {
+  @apply leading-[1.7];
 }
 
 * {

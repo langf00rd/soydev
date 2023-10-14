@@ -59,7 +59,8 @@ export default function ChecklistPage(): JSX.Element {
       <Header />
       <div className="flex items-center justify-center px-5">
         <main className="max-w-4xl w-full py-10 mx-auto space-y-10">
-          <div>
+          <div className="space-y-3">
+	    {checklistToShow.length > 0 && <Button variant="ghost" onClick={()=>window.history.back()} className="px-0">&larr; go back</Button>}
             <h1 className="text-2xl md:text-3xl">
               {checklistToShow.length > 0
                 ? `${selectedRole} checklist`

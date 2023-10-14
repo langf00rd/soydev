@@ -39,9 +39,9 @@ export default function Header(): JSX.Element {
           >
             <Github />
           </Link>
-          {/* <SignedIn>
+          <SignedIn>
             <UserButton />
-          </SignedIn> */}
+          </SignedIn>
         </div>
       </div>
     </header>

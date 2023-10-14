@@ -11,38 +11,14 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="max-w-4xl mx-auto space-y-5">
-        <motion.h1
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          className="text-2xl md:text-[3.3rem] leading-[50px] text-center mt-20"
-        >
-          discover and unlock your true potential
-        </motion.h1>
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-center max-w-xl mx-auto px-10"
-        >
-          <p className="font-[500] text-[#000]">
+      <main className="max-w-3xl mx-auto py-20 text-center space-y-5">
+        <h1 className="py-4 text-5xl font-bold tracking-tight text-center text-transparent bg-gradient-to-t bg-clip-text to-primary from-red-500/30 sm:text-7xl">discover and unlock your true potential</h1>
+	<p className="font-[500] text-[#000]">
             soydev [ soy - dev ] <i>noun</i>
-          </p>
-          <p>
-            &ldquo;A &lsquo;programmer&rsquo; that works at a bich tech company and only
-            knows javascript and HTML. They love IDEs like Visual Studio Code and
-            inefficient frameworks that slow their code down...&rdquo; -
-            <br />
-	    <Link className="underline"
-              rel="noreferrer"
-              href="https://www.urbandictionary.com/define.php?term=Soydev"
-              target="_blank"
-            >
-              &nbsp;Urban dictionary
-            </Link>
-          </p>
-        </motion.div>
+        </p>
+        <p> &ldquo;A &lsquo;programmer&rsquo; that works at a bich tech company and only knows javascript and HTML. They love IDEs like Visual Studio Code and
+	inefficient frameworks that slow their code down...&rdquo;
+	</p>
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ y: 0, opacity: 1 }}
@@ -51,10 +27,7 @@ export default function Home() {
         >
           {!userId ? (
             <Link href={ROUTES.signIn}>
-              <Button
-                variant="link"
-                className="rounded-full text-md bg-[#000] text-[#fff]"
-              >
+              <Button variant="link">
                 Get started &nbsp;
                 <ArrowRight size={18} />
               </Button>
