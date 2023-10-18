@@ -33,8 +33,8 @@ export default function ChecklistPage(): JSX.Element {
       const entry = await getUserEntryFromDB();
       if (!entry) return;
       console.log(entry);
-      setSelectedRole(entry.role);
-      setChecked(entry.checklist);
+      // setSelectedRole(entry.role);
+      // setChecked(entry.checklist);
     })();
   }, []);
 
