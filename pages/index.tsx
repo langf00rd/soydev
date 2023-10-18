@@ -16,11 +16,11 @@ export default function Home() {
 	<p className="font-[500] text-[#000]">
             soydev [ soy - dev ] <i>noun</i>
         </p>
-        <p> &ldquo;A &lsquo;programmer&rsquo; that works at a bich tech company and only knows javascript and HTML. They love IDEs like Visual Studio Code and
+           <p> &ldquo;A &lsquo;programmer&rsquo; that works at a bich tech company and only knows javascript and HTML. They love IDEs like Visual Studio Code and
 	inefficient frameworks that slow their code down...&rdquo;
 	</p>
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -10 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
           className="flex items-center space-x-3 justify-center"
