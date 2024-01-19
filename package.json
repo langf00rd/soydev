@@ -21,7 +21,7 @@
     "axios": "^1.5.0",
     "class-variance-authority": "^0.7.0",
     "eslint": "8.50.0",
-    "eslint-config-next": "13.5.2",
+    "eslint-config-next": "14.1.0",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.279.0",
